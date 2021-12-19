@@ -24,7 +24,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/12/19/%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/images/thumb/vue.jpg">
 <meta property="article:published_time" content="2021-12-19T12:49:39.000Z">
-<meta property="article:modified_time" content="2021-12-19T13:10:57.642Z">
+<meta property="article:modified_time" content="2021-12-19T14:09:52.336Z">
 <meta property="article:author" content="小森">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2021/12/19/%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/images/thumb/vue.jpg">
@@ -176,7 +176,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        283
+                        678
                     
                     字
                 </li>
@@ -185,7 +185,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1639919457642"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1639922992336"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -203,6 +203,12 @@
 <blockquote>
 <p>两种常见的试图改变一个 prop 的情形</p>
 </blockquote>
+<ol>
+<li><p><strong>这个 prop 用来传递一个初始值; 这个子组件接下来希望将作为一个本地的 prop数据来使用。</strong>在这种情况下，最好定义一个本地的 data 属性并将这个 prop 用作其初始值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props:[<span class="string">&#x27;initialCounter&#x27;</span>],</span><br><span class="line"><span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">counter</span>: <span class="built_in">this</span>.initialCounter</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>这个 prop 以一种原始的值传入且需要进行转换。</strong> 在这种情况下，最好使用这个 prop 的值来定义一个计算属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props: [<span class="string">&#x27;size&#x27;</span>],</span><br><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">  <span class="function"><span class="title">normalizedSize</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.size.trim().loLowerCase()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
         </div>
         
