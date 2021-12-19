@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>小森の博客</title>
+  <title>spa单页面 | 小森の博客</title>
   <meta name="author" content="小森" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -15,17 +15,19 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="Be the person you want to be">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小森の博客">
-<meta property="og:url" content="http://example.com/search/index.html">
+  <meta name="description" content="SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路由机制实现 HTML 内容的变换，UI 与用户的交互，避免页面的重新加载。  优点 用户体验好、块，内容的改变不需要加载整个页面，避免了不必要的跳转和重复渲染;  基">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spa单页面">
+<meta property="og:url" content="http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/index.html">
 <meta property="og:site_name" content="小森の博客">
-<meta property="og:description" content="Be the person you want to be">
+<meta property="og:description" content="SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路由机制实现 HTML 内容的变换，UI 与用户的交互，避免页面的重新加载。  优点 用户体验好、块，内容的改变不需要加载整个页面，避免了不必要的跳转和重复渲染;  基">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/null">
+<meta property="og:image" content="http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/images/thumb/vue.jpg">
+<meta property="article:published_time" content="2021-12-19T12:17:18.000Z">
+<meta property="article:modified_time" content="2021-12-19T12:51:25.443Z">
 <meta property="article:author" content="小森">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/null">
+<meta name="twitter:image" content="http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/images/thumb/vue.jpg">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -160,34 +162,163 @@
 
         
 
-            <div class="kratos-hentry kratos-post-inner clearfix">
-    <div class="kratos-post-content">
-        <h2 class="title-h2 text-center">搜索</h2>
-        <form class="input-group" onsubmit="return inpSearch();">
-            <input class="form-input input-lg" id="search-input" maxlength="80" name="s" placeholder="有什么想找找看的呢o(*￣▽￣*)ブ" required type="search">
-            <button class="btn btn-primary" type="submit">找一找~</button>
-        </form>
-    </div>
-</div>
-
-<div class="alert alert-info" id="kr-search-notice">
-    这里是 小森の博客 的搜索引擎~
-</div>
-
-<div id="result-posts">
+            <article>
     <div class="kratos-hentry kratos-post-inner clearfix">
-        <div class="kratos-post-content">
-            <p>搜索多个关键词时请用空格分割，例如「」这样；</p>
-            <p>您也可以使用这些标签碰碰运气哦~</p>
-            <p class="search-demo-tags">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">spa单页面</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2021-12-19</li>
+                <li><i class="fa fa-user"></i> 作者 小森</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        447
+                    
+                    字
+                </li>
                 
-            </p>
-        </div>
-    </div>
-</div>
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1639918285443"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <blockquote>
+<p>SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路由机制实现 HTML 内容的变换，UI 与用户的交互，避免页面的重新加载。</p>
+</blockquote>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li><p>用户体验好、块，内容的改变不需要加载整个页面，避免了不必要的跳转和重复渲染;</p>
+</li>
+<li><p>基于上面一点，SPA相对于服务器压力小</p>
+</li>
+<li><p>前后端职责分离，架构清晰，前端进行交互逻辑。后端负责数据处理</p>
+</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li><p>初次加载耗时较多: 为实现单页 Web 应用功能及显示效果，需要在加载页面的时候将JavaScript、CSS 统一加载，部分页面按需加载;</p>
+</li>
+<li><p>前进后退路由管理: 由于单页应用在一个页面中显示所有的内容，所以不能使用浏览器的前进后退功能。所有的页面切换需要自己简历堆栈管理;</p>
+</li>
+<li><p>SEO 难度较大: 由于所有的内容都在一个页面中动态替换显示，所以在 SEO 上其有着天然的弱势。</p>
+</li>
+</ul>
 
-<script>var searchDataFile = "/search.json";</script>
-<script defer src="/js/local-search.min.js"></script>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>-- end --</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/";
+            const title         = "「spa单页面」";
+            const excerpt       = `
+SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2021-12-19</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" DEMO" href="/2021/12/19/新建 文本文档/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 单向数据流" href="/2021/12/19/单向数据流/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
 
         
 
@@ -200,8 +331,6 @@
 
 <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
     <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
-    
-        <div class="sticky-area">
     
     
                 <aside id="krw-about" class="widget widget-kratos-about clearfix">
@@ -216,6 +345,8 @@
     </div>
 </aside>
             
+                    <div class="sticky-area">
+                
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
