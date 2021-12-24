@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>spa单页面 | Sen's blog</title>
+  <title>rem适配js代码 | Sen's blog</title>
   <meta name="author" content="小森" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -15,19 +15,19 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路由机制实现 HTML 内容的变换，UI 与用户的交互，避免页面的重新加载。  优点 用户体验好、块，内容的改变不需要加载整个页面，避免了不必要的跳转和重复渲染;  基">
+  <meta name="description" content="rem适配 rem是指相对于根元素（html）的字体大小的单位，它是一个相对单位，它是css3新增加的一个单位属性，我们现在有很多人用的都是px,但px是一个绝对单位，遇到分辨率不同的设备，做出的页面可能会乱，这就给我们造成了很大的影响，而且后期的修复也很费时间，所以rem是一个很不错的适配方法。rem的初始值是16px，也就是说在没有设置根节点的font-size的时候，1rem&#x3D;16px；我">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spa单页面">
-<meta property="og:url" content="http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/index.html">
+<meta property="og:title" content="rem适配js代码">
+<meta property="og:url" content="http://example.com/2021/12/25/rem%E9%80%82%E9%85%8Djs%E4%BB%A3%E7%A0%81/index.html">
 <meta property="og:site_name" content="Sen&#39;s blog">
-<meta property="og:description" content="SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路由机制实现 HTML 内容的变换，UI 与用户的交互，避免页面的重新加载。  优点 用户体验好、块，内容的改变不需要加载整个页面，避免了不必要的跳转和重复渲染;  基">
+<meta property="og:description" content="rem适配 rem是指相对于根元素（html）的字体大小的单位，它是一个相对单位，它是css3新增加的一个单位属性，我们现在有很多人用的都是px,但px是一个绝对单位，遇到分辨率不同的设备，做出的页面可能会乱，这就给我们造成了很大的影响，而且后期的修复也很费时间，所以rem是一个很不错的适配方法。rem的初始值是16px，也就是说在没有设置根节点的font-size的时候，1rem&#x3D;16px；我">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/images/thumb/vue.jpg">
-<meta property="article:published_time" content="2021-12-19T12:17:18.000Z">
-<meta property="article:modified_time" content="2021-12-19T12:51:25.443Z">
+<meta property="og:image" content="http://example.com/null">
+<meta property="article:published_time" content="2021-12-24T16:18:10.000Z">
+<meta property="article:modified_time" content="2021-12-24T16:50:29.553Z">
 <meta property="article:author" content="小森">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/images/thumb/vue.jpg">
+<meta name="twitter:image" content="http://example.com/null">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -166,17 +166,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">spa单页面</h1>
+                <h1 class="kratos-entry-title text-center">rem适配js代码</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-12-19</li>
+                <li><i class="fa fa-calendar"></i> 2021-12-25</li>
                 <li><i class="fa fa-user"></i> 作者 小森</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        447
+                        ~1.99K
                     
                     字
                 </li>
@@ -185,29 +185,19 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1639918285443"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1640364629553"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
             <blockquote>
-<p>SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路由机制实现 HTML 内容的变换，UI 与用户的交互，避免页面的重新加载。</p>
-</blockquote>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li><p>用户体验好、块，内容的改变不需要加载整个页面，避免了不必要的跳转和重复渲染;</p>
-</li>
-<li><p>基于上面一点，SPA相对于服务器压力小</p>
-</li>
-<li><p>前后端职责分离，架构清晰，前端进行交互逻辑。后端负责数据处理</p>
-</li>
+<h2 id="rem适配"><a href="#rem适配" class="headerlink" title="rem适配"></a>rem适配</h2></blockquote>
+<p>rem是指相对于根元素（html）的字体大小的单位，它是一个相对单位，它是css3新增加的一个单位属性，我们现在有很多人用的都是px,但px是一个绝对单位，遇到分辨率不同的设备，做出的页面可能会乱，这就给我们造成了很大的影响，而且后期的修复也很费时间，所以rem是一个很不错的适配方法。rem的初始值是16px，也就是说在没有设置根节点的font-size的时候，1rem=16px；我们现在需要设置<code>1rem = 100px</code></p>
+<ul>
+<li>在header或文件引入当前代码</li>
 </ul>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
-<li><p>初次加载耗时较多: 为实现单页 Web 应用功能及显示效果，需要在加载页面的时候将JavaScript、CSS 统一加载，部分页面按需加载;</p>
-</li>
-<li><p>前进后退路由管理: 由于单页应用在一个页面中显示所有的内容，所以不能使用浏览器的前进后退功能。所有的页面切换需要自己简历堆栈管理;</p>
-</li>
-<li><p>SEO 难度较大: 由于所有的内容都在一个页面中动态替换显示，所以在 SEO 上其有着天然的弱势。</p>
-</li>
-</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自定义设计稿的宽度：designWidth</span></span><br><span class="line"><span class="comment">//最大宽度:maxWidth</span></span><br><span class="line"><span class="comment">//这段js的最后面有两个参数，一个为设计稿实际宽度，一个为制作稿最大宽度，例如设计稿为750，最大宽度为750，则为(750,750)</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">designWidth, maxWidth</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> doc = <span class="built_in">document</span>,</span><br><span class="line">    win = <span class="built_in">window</span>,</span><br><span class="line">    docEl = doc.documentElement,</span><br><span class="line">    remStyle = <span class="built_in">document</span>.createElement(<span class="string">&quot;style&quot;</span>),</span><br><span class="line">    tid;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">refreshRem</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> width = docEl.getBoundingClientRect().width;</span><br><span class="line">    maxWidth = maxWidth || <span class="number">540</span>;</span><br><span class="line">    width &gt; maxWidth &amp;&amp; (width = maxWidth);</span><br><span class="line">    <span class="keyword">var</span> rem = (width * <span class="number">100</span>) / designWidth;</span><br><span class="line">    remStyle.innerHTML = <span class="string">&quot;html&#123;font-size:&quot;</span> + rem + <span class="string">&quot;px;&#125;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (docEl.firstElementChild) &#123;</span><br><span class="line">    docEl.firstElementChild.appendChild(remStyle);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wrap = doc.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    wrap.appendChild(remStyle);</span><br><span class="line">    doc.write(wrap.innerHTML);</span><br><span class="line">    wrap = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；</span></span><br><span class="line">  refreshRem();</span><br><span class="line"></span><br><span class="line">  win.addEventListener(</span><br><span class="line">    <span class="string">&quot;resize&quot;</span>,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">clearTimeout</span>(tid); <span class="comment">//防止执行两次</span></span><br><span class="line">      tid = <span class="built_in">setTimeout</span>(refreshRem, <span class="number">300</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="literal">false</span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  win.addEventListener(</span><br><span class="line">    <span class="string">&quot;pageshow&quot;</span>,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (e.persisted) &#123;</span><br><span class="line">        <span class="comment">// 浏览器后退的时候重新计算</span></span><br><span class="line">        <span class="built_in">clearTimeout</span>(tid);</span><br><span class="line">        tid = <span class="built_in">setTimeout</span>(refreshRem, <span class="number">300</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="literal">false</span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (doc.readyState === <span class="string">&quot;complete&quot;</span>) &#123;</span><br><span class="line">    doc.body.style.fontSize = <span class="string">&quot;16px&quot;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    doc.addEventListener(</span><br><span class="line">      <span class="string">&quot;DOMContentLoaded&quot;</span>,</span><br><span class="line">      <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        doc.body.style.fontSize = <span class="string">&quot;16px&quot;</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="literal">false</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(<span class="number">375</span>, <span class="number">375</span>); <span class="comment">//设计图的宽度</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>cssrem</code>设置<code>1rem = 100px</code></p>
 
         </div>
         
@@ -261,7 +251,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/",
+                text: "http://example.com/2021/12/25/rem%E9%80%82%E9%85%8Djs%E4%BB%A3%E7%A0%81/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -273,10 +263,11 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2021/12/19/spa%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/";
-            const title         = "「spa单页面」";
+            const hostUrl       = "http://example.com/2021/12/25/rem%E9%80%82%E9%85%8Djs%E4%BB%A3%E7%A0%81/";
+            const title         = "「rem适配js代码」";
             const excerpt       = `
-SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路...`;
+rem适配
+rem是指相对于根元素（html）的字体大小的单位，它是一个相对单位，它是css3新增加的一个单位属性，我们现在有很多人用的都是px,但px是一个绝对单位，遇到分辨率不同的设备，做出的页面可能会乱，这就给我们造成了很大的...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -298,7 +289,7 @@ SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 H
                     
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-12-19</span>
+                <span>最后编辑：2021-12-25</span>
                 </div>
             </div>
         </footer>
@@ -306,9 +297,13 @@ SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 H
     
         <nav class="navigation post-navigation clearfix" role="navigation">
             
+            <div class="nav-previous clearfix">
+                <a title=" flow类型注解" href="/2021/12/24/flow类型注解/">&lt; 上一篇</a>
+            </div>
+            
             
             <div class="nav-next clearfix">
-                <a title=" 单向数据流" href="/2021/12/19/单向数据流/">下一篇 &gt;</a>
+                <a title=" glup报错解决" href="/2021/12/25/glup报错解决/">下一篇 &gt;</a>
             </div>
             
         </nav>
