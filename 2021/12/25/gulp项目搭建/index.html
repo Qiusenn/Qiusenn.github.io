@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="">
+  <title>gulp项目搭建 | Sen's blog</title>
+  <meta name="author" content="小森" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="使用gulp搭建TypeScript 什么是 gulp?  Gulp 是基于node.js的一个前端自动化构建工具，开发这可以使用它构建自动化工作流程（前端集成开发环境）。使用gulp你可以简化工作量，让你把重点放在功能的开发上，从而提高你的开发效率和工作质量。例如：你可以用gulp可以网页自动刷新，和MVVM开发模式很相似，如果你对vue.js有所了解的话，那么你一定不会陌生。你也可以使用gul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp项目搭建">
+<meta property="og:url" content="http://example.com/2021/12/25/gulp%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Sen&#39;s blog">
+<meta property="og:description" content="使用gulp搭建TypeScript 什么是 gulp?  Gulp 是基于node.js的一个前端自动化构建工具，开发这可以使用它构建自动化工作流程（前端集成开发环境）。使用gulp你可以简化工作量，让你把重点放在功能的开发上，从而提高你的开发效率和工作质量。例如：你可以用gulp可以网页自动刷新，和MVVM开发模式很相似，如果你对vue.js有所了解的话，那么你一定不会陌生。你也可以使用gul">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/12/25/gulp%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/images/thumb/gulp.jpg">
+<meta property="article:published_time" content="2021-12-25T12:54:59.000Z">
+<meta property="article:modified_time" content="2021-12-25T13:09:17.864Z">
+<meta property="article:author" content="小森">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/12/25/gulp%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/images/thumb/gulp.jpg">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner_dark.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/aboutMe/"><i class="fa fa-user-o"></i>关于我</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://qiusenn.github.io/">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Qiusenn/Qiusenn.github.io">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Sen&#39;s blog</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Sen&#39;s blog</h2> <br />
+                        <span>Full stack engineer of the future</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">gulp项目搭建</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2021-12-25</li>
+                <li><i class="fa fa-user"></i> 作者 小森</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~7.47K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1640437757864"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h1 id="使用gulp搭建TypeScript"><a href="#使用gulp搭建TypeScript" class="headerlink" title="使用gulp搭建TypeScript"></a>使用gulp搭建TypeScript</h1><blockquote>
+<p>什么是 <strong>gulp</strong>?</p>
+</blockquote>
+<p>Gulp 是基于node.js的一个前端自动化构建工具，开发这可以使用它构建自动化工作流程（前端集成开发环境）。<br>使用gulp你可以简化工作量，让你把重点放在功能的开发上，从而提高你的开发效率和工作质量。<br>例如：你可以用gulp可以网页自动刷新，和MVVM开发模式很相似，如果你对vue.js有所了解的话，那么你一定不会陌生。你也可以使用gulp对sass进行预处理、代码检测、图片优化压缩、只需要一个简单的指令就能全部完成。</p>
+<hr>
+<blockquote>
+<h3 id="在Gulp管道里添加Browserify，-uglify或Watchify。-它还包涵了-Babel的功能，通过使用Babelify。"><a href="#在Gulp管道里添加Browserify，-uglify或Watchify。-它还包涵了-Babel的功能，通过使用Babelify。" class="headerlink" title="在Gulp管道里添加Browserify， uglify或Watchify。 它还包涵了 Babel的功能，通过使用Babelify。"></a>在Gulp管道里添加Browserify， uglify或Watchify。 它还包涵了 Babel的功能，通过使用Babelify。</h3></blockquote>
+<ul>
+<li><h4 id="搭建工程目录-proj可更改为其他项目名"><a href="#搭建工程目录-proj可更改为其他项目名" class="headerlink" title="搭建工程目录 (proj可更改为其他项目名)"></a>搭建工程目录 (proj可更改为其他项目名)</h4></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proj/</span><br><span class="line">   ├─ src/</span><br><span class="line">   └─ dist/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="初始化工程-进入proj文件，初始化完成会生成package-json文件用来更改项目配置"><a href="#初始化工程-进入proj文件，初始化完成会生成package-json文件用来更改项目配置" class="headerlink" title="初始化工程(进入proj文件，初始化完成会生成package.json文件用来更改项目配置)"></a>初始化工程(进入<strong>proj</strong>文件，初始化完成会生成package.json文件用来更改项目配置)</h4></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="安装依赖项-全局安装TypeScript和Gulp"><a href="#安装依赖项-全局安装TypeScript和Gulp" class="headerlink" title="安装依赖项 (全局安装TypeScript和Gulp)"></a>安装依赖项 (全局安装TypeScript和Gulp)</h4></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g gulp-cli</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="安装typescript，gulp和gulp-typescript到开发依赖项。-Gulp-typescript是TypeScript的一个Gulp插件。"><a href="#安装typescript，gulp和gulp-typescript到开发依赖项。-Gulp-typescript是TypeScript的一个Gulp插件。" class="headerlink" title="安装typescript，gulp和gulp-typescript到开发依赖项。 Gulp-typescript是TypeScript的一个Gulp插件。"></a>安装typescript，gulp和gulp-typescript到开发依赖项。 Gulp-typescript是TypeScript的一个Gulp插件。</h4></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev typescript gulp gulp-typescript</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="写一个简单的例子-让我们写一个Hello-World程序。-在-src目录下创建main-ts文件"><a href="#写一个简单的例子-让我们写一个Hello-World程序。-在-src目录下创建main-ts文件" class="headerlink" title="写一个简单的例子 (让我们写一个Hello World程序。 在 src目录下创建main.ts文件)"></a>写一个简单的例子 (让我们写一个Hello World程序。 在 src目录下创建main.ts文件)</h4></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params">compiler: string</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Hello from <span class="subst">$&#123;compiler&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">hello(<span class="string">&quot;TypeScript&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在工程的根目录proj下新建一个tsconfig.json文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;files&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;src/main.ts&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;noImplicitAny&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es5&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="新建-gulpfile-js-文件-在工程根目录下，新建一个gulpfile-js文件："><a href="#新建-gulpfile-js-文件-在工程根目录下，新建一个gulpfile-js文件：" class="headerlink" title="新建 gulpfile.js 文件 (在工程根目录下，新建一个gulpfile.js文件：)"></a>新建 <strong>gulpfile.js</strong> 文件 (在工程根目录下，新建一个gulpfile.js文件：)</h4></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&quot;gulp&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> ts = <span class="built_in">require</span>(<span class="string">&quot;gulp-typescript&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> tsProject = ts.createProject(<span class="string">&quot;tsconfig.json&quot;</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&quot;default&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> tsProject.src()</span><br><span class="line">        .pipe(tsProject())</span><br><span class="line">        .js.pipe(gulp.dest(<span class="string">&quot;dist&quot;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="测试这个应用"><a href="#测试这个应用" class="headerlink" title="测试这个应用"></a>测试这个应用</h4></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br><span class="line">node dist/main.js</span><br></pre></td></tr></table></figure>
+
+<p>程序应该能够打印出“Hello from TypeScript!”。</p>
+<ul>
+<li><h4 id="向代码里添加模块-注意：在使用Browserify前，让我们先构建一下代码然后再添加一些混入的模块。-这个结构将是你在真实应用程序中会用到的。"><a href="#向代码里添加模块-注意：在使用Browserify前，让我们先构建一下代码然后再添加一些混入的模块。-这个结构将是你在真实应用程序中会用到的。" class="headerlink" title="向代码里添加模块 (注意：在使用Browserify前，让我们先构建一下代码然后再添加一些混入的模块。 这个结构将是你在真实应用程序中会用到的。)"></a>向代码里添加模块 (注意：在使用Browserify前，让我们先构建一下代码然后再添加一些混入的模块。 这个结构将是你在真实应用程序中会用到的。)</h4><p>新建一个src/greet.ts文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">name: string</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Hello from <span class="subst">$&#123;name&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更改src/main.ts代码，从greet.ts导入sayHello：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; sayHello &#125; <span class="keyword">from</span> <span class="string">&quot;./greet&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(sayHello(<span class="string">&quot;TypeScript&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>最后，将src/greet.ts添加到tsconfig.json</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;files&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;src/main.ts&quot;</span>,</span><br><span class="line">      <span class="string">&quot;src/greet.ts&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;noImplicitAny&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es5&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>确保执行gulp后模块是能工作的，在Node.js下进行测试</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br><span class="line">node dist/main.js</span><br></pre></td></tr></table></figure></li>
+<li><h4 id="Browserify-把所有模块捆绑成一个JavaScript文件。-所幸，这正是Browserify要做的事情。-更方便的是，它支持Node-js的CommonJS模块，这也正是TypeScript默认生成的类型。-也就是说TypeScript和Node-js的设置不需要改变就可以移植到浏览器里。"><a href="#Browserify-把所有模块捆绑成一个JavaScript文件。-所幸，这正是Browserify要做的事情。-更方便的是，它支持Node-js的CommonJS模块，这也正是TypeScript默认生成的类型。-也就是说TypeScript和Node-js的设置不需要改变就可以移植到浏览器里。" class="headerlink" title="Browserify (把所有模块捆绑成一个JavaScript文件。 所幸，这正是Browserify要做的事情。 更方便的是，它支持Node.js的CommonJS模块，这也正是TypeScript默认生成的类型。 也就是说TypeScript和Node.js的设置不需要改变就可以移植到浏览器里。)"></a>Browserify (把所有模块捆绑成一个JavaScript文件。 所幸，这正是Browserify要做的事情。 更方便的是，它支持Node.js的CommonJS模块，这也正是TypeScript默认生成的类型。 也就是说TypeScript和Node.js的设置不需要改变就可以移植到浏览器里。)</h4></li>
+<li><h4 id="安装Browserify，tsify和vinyl-source-stream。"><a href="#安装Browserify，tsify和vinyl-source-stream。" class="headerlink" title="安装Browserify，tsify和vinyl-source-stream。"></a>安装Browserify，tsify和vinyl-source-stream。</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev browserify tsify vinyl-source-stream</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>tsify</code> : 是Browserify的一个插件，就像gulp-typescript一样，它能够访问TypeScript编译器。</li>
+<li><code>vinyl-source-stream</code> : 会将Browserify的输出文件适配成gulp能够解析的格式，它叫做 vinyl。</li>
+</ol>
+</li>
+<li><h4 id="新建一个页面-在src目录下新建一个index-html文件："><a href="#新建一个页面-在src目录下新建一个index-html文件：" class="headerlink" title="新建一个页面 (在src目录下新建一个index.html文件：)"></a>新建一个页面 (在src目录下新建一个index.html文件：)</h4></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;greeting&quot;</span>&gt;</span>Loading ...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>修改main.ts文件来更新这个页面：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; sayHello &#125; <span class="keyword">from</span> <span class="string">&quot;./greet&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showHello</span>(<span class="params">divName: string, name: string</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> elt = <span class="built_in">document</span>.getElementById(divName);</span><br><span class="line">    elt.innerText = sayHello(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">showHello(<span class="string">&quot;greeting&quot;</span>, <span class="string">&quot;TypeScript&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>showHello调用sayHello函数更改页面上段落的文字。 现在修改gulpfile文件如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&quot;gulp&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> browserify = <span class="built_in">require</span>(<span class="string">&quot;browserify&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> source = <span class="built_in">require</span>(<span class="string">&#x27;vinyl-source-stream&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> tsify = <span class="built_in">require</span>(<span class="string">&quot;tsify&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> paths = &#123;</span><br><span class="line">    <span class="attr">pages</span>: [<span class="string">&#x27;src/*.html&#x27;</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&quot;copy-html&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(paths.pages)</span><br><span class="line">        .pipe(gulp.dest(<span class="string">&quot;dist&quot;</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&quot;default&quot;</span>, [<span class="string">&quot;copy-html&quot;</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> browserify(&#123;</span><br><span class="line">        <span class="attr">basedir</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">        <span class="attr">debug</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">entries</span>: [<span class="string">&#x27;src/main.ts&#x27;</span>],</span><br><span class="line">        <span class="attr">cache</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">packageCache</span>: &#123;&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .plugin(tsify)</span><br><span class="line">    .bundle()</span><br><span class="line">    .pipe(source(<span class="string">&#x27;bundle.js&#x27;</span>))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">&quot;dist&quot;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<p>这里增加了copy-html任务并且把它加作default的依赖项。 这样，当 default执行时，copy-html会被首先执行。 我们还修改了 default任务，让它使用tsify插件调用Browserify，而不是gulp-typescript。 方便的是，两者传递相同的参数对象到TypeScript编译器。</p>
+<p>调用bundle后，我们使用source（vinyl-source-stream的别名）把输出文件命名为bundle.js。</p>
+<p>测试此页面，运行gulp，然后在浏览器里打开dist/index.html。 你应该能在页面上看到“Hello from TypeScript”。</p>
+<p>注意，我们为Broswerify指定了debug: true。 这会让 tsify在输出文件里生成source maps。 source maps允许我们在浏览器中直接调试TypeScript源码，而不是在合并后的JavaScript文件上调试。 你要打开调试器并在 main.ts里打一个断点，看看source maps是否能工作。 当你刷新页面时，代码会停在断点处，从而你就能够调试 greet.ts。</p>
+<h2 id="Watchify，Babel和Uglify"><a href="#Watchify，Babel和Uglify" class="headerlink" title="Watchify，Babel和Uglify"></a>Watchify，Babel和Uglify</h2><p>现在代码已经用Browserify和tsify捆绑在一起了，我们可以使用Browserify插件为构建添加一些特性。</p>
+<p><code>Watchify</code> : 启动Gulp并保持运行状态，当你保存文件时自动编译。 帮你进入到编辑-保存-刷新浏览器的循环中。<br><code>Babel</code> : 是个十分灵活的编译器，将ES2015及以上版本的代码转换成ES5和ES3。 你可以添加大量自定义的TypeScript目前不支持的转换器。<br><code>Uglify</code> : 帮你压缩代码，将花费更少的时间去下载它们。</p>
+<p>依次安装 :<br><code>npm install --save-dev watchify gulp-util</code><br><code>npm install --save-dev gulp-uglify vinyl-buffer gulp-sourcemaps</code><br><code>npm install --save-dev babelify babel-core babel-preset-es2015 vinyl-buffer gulp-sourcemaps</code></p>
+<h2 id="最后更改-gulpfile-js-文件为"><a href="#最后更改-gulpfile-js-文件为" class="headerlink" title="最后更改 gulpfile.js 文件为 :"></a>最后更改 <code>gulpfile.js</code> 文件为 :</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&quot;gulp&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> browserify = <span class="built_in">require</span>(<span class="string">&quot;browserify&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> source = <span class="built_in">require</span>(<span class="string">&#x27;vinyl-source-stream&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> watchify = <span class="built_in">require</span>(<span class="string">&quot;watchify&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> tsify = <span class="built_in">require</span>(<span class="string">&quot;tsify&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> gutil = <span class="built_in">require</span>(<span class="string">&quot;gulp-util&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">&#x27;gulp-uglify&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> sourcemaps = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sourcemaps&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> buffer = <span class="built_in">require</span>(<span class="string">&#x27;vinyl-buffer&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> paths = &#123;</span><br><span class="line">    <span class="attr">pages</span>: [<span class="string">&#x27;src/*.html&#x27;</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> watchedBrowserify = watchify(browserify(&#123;</span><br><span class="line">    <span class="attr">basedir</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">    <span class="attr">debug</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">entries</span>: [<span class="string">&#x27;src/main.ts&#x27;</span>],</span><br><span class="line">    <span class="attr">cache</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">packageCache</span>: &#123;&#125;</span><br><span class="line">&#125;).plugin(tsify));</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&quot;copy-html&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(paths.pages)</span><br><span class="line">        .pipe(gulp.dest(<span class="string">&quot;dist&quot;</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bundle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> watchedBrowserify</span><br><span class="line">        .bundle()</span><br><span class="line">        .pipe(source(<span class="string">&#x27;bundle.js&#x27;</span>))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">&quot;dist&quot;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&quot;default&quot;</span>, gulp.series(<span class="string">&quot;copy-html&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> browserify(&#123;</span><br><span class="line">        <span class="attr">basedir</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">        <span class="attr">debug</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">entries</span>: [<span class="string">&#x27;src/main.ts&#x27;</span>],</span><br><span class="line">        <span class="attr">cache</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">packageCache</span>: &#123;&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .plugin(tsify)</span><br><span class="line">    .bundle()</span><br><span class="line">    .pipe(source(<span class="string">&#x27;bundle.js&#x27;</span>))</span><br><span class="line">    .pipe(buffer())</span><br><span class="line">    .pipe(sourcemaps.init(&#123;<span class="attr">loadMaps</span>: <span class="literal">true</span>&#125;))</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(sourcemaps.write(<span class="string">&#x27;./&#x27;</span>))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">&quot;dist&quot;</span>));</span><br><span class="line">&#125;,bundle) );</span><br><span class="line"></span><br><span class="line"><span class="comment">// gulp.task(&quot;default&quot;, [&quot;copy-html&quot;], bundle);</span></span><br><span class="line"><span class="comment">// gulp.task(&quot;default&quot;, gulp.series(&quot;copy-html&quot;, bundle));</span></span><br><span class="line">watchedBrowserify.on(<span class="string">&quot;update&quot;</span>, bundle);</span><br><span class="line">watchedBrowserify.on(<span class="string">&quot;log&quot;</span>, gutil.log);</span><br></pre></td></tr></table></figure>
+
+<p>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br></pre></td></tr></table></figure>
+
+<p>项目搭建成功</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">PS D:\typescript_study\ts_gulp&gt; gulp</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">21</span>] Using gulpfile D:\typescript_study\ts_gulp\gulpfile.js</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">21</span>] Starting <span class="string">&#x27;default&#x27;</span>...</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">21</span>] Starting <span class="string">&#x27;copy-html&#x27;</span>...</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">21</span>] Finished <span class="string">&#x27;copy-html&#x27;</span> after <span class="number">44</span> ms</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">21</span>] Starting <span class="string">&#x27;&lt;anonymous&gt;&#x27;</span>...</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">23</span>] Finished <span class="string">&#x27;&lt;anonymous&gt;&#x27;</span> after <span class="number">2.41</span> s</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">23</span>] Starting <span class="string">&#x27;bundle&#x27;</span>...</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">25</span>] <span class="number">2832</span> bytes written (<span class="number">0.03</span> seconds)</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">25</span>] Finished <span class="string">&#x27;bundle&#x27;</span> after <span class="number">1.22</span> s</span><br><span class="line">[<span class="number">20</span>:<span class="number">52</span>:<span class="number">25</span>] Finished <span class="string">&#x27;default&#x27;</span> after <span class="number">3.68</span> s</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>-- end --</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2021/12/25/gulp%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2021/12/25/gulp%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/";
+            const title         = "「gulp项目搭建」";
+            const excerpt       = `使用gulp搭建TypeScript
+什么是 gulp?
+
+Gulp 是基于node.js的一个前端自动化构建工具，开发这可以使用它构建自动化工作流程（前端集成开发环境）。使用gulp你可以简化工作量，让你把重点放在功能的开发上，从而...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2021-12-25</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" rem适配js代码" href="/2021/12/25/rem适配js代码/">&lt; 上一篇</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">To be the person you want to be</p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TS/">TS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gulp/">gulp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rem%E9%80%82%E9%85%8D/">rem适配</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2021/12/25/gulp%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> gulp项目搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/12/25/rem%E9%80%82%E9%85%8Djs%E4%BB%A3%E7%A0%81/"><i class="fa  fa-book"></i> rem适配js代码</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/12/25/glup%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/"><i class="fa  fa-book"></i> glup报错解决</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/12/24/flow%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/"><i class="fa  fa-book"></i> flow类型注解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/12/23/%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC/"><i class="fa  fa-book"></i> 函数参数的默认值</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://t.me/CandyUnion"><i class="fa fa-telegram"></i></a></li>
+                        
+                        
+                        
+                        <li><a target="_blank" rel="me" href="https://nya.one/@qiusenn"><i class="fa fa fa-share-alt-square"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/qiusenn"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2021 Sen's blog.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by 小森.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
