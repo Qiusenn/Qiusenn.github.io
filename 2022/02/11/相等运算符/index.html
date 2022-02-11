@@ -15,19 +15,19 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="相等运算符的算法细节相等运算符的总体描述，只有一句话: 相等运算符用于比较两个值，返回true或false。 首先看下面的表达式 10 &#x3D;&#x3D; null 相等运算符算法一共有12步： 1.如果x不是正常值(比如抛出错误)，中断执行。类似使用未定义的变量进行比较(抛出错误)  2.如果y不是正常值，中断执行。 3.如果Type(x)与Type(y)相同，执行严格相等运算x &#x3D;&#x3D;&#x3D; y。 4.如果x是n">
+  <meta name="description" content="相等运算符的算法细节相等运算符的总体描述，只有一句话: 相等运算符用于比较两个值，返回true或false。 首先看下面的表达式 10 &#x3D;&#x3D; null 相等运算符算法一共有12步： 1.如果x不是正常值(比如抛出错误)，中断执行。类似使用未定义的变量进行比较(抛出错误) 2.如果y不是正常值，中断执行。 3.如果Type(x)与Type(y)相同，执行严格相等运算x &#x3D;&#x3D;&#x3D; y。 4.如果x是nu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="相等运算符">
 <meta property="og:url" content="http://example.com/2022/02/11/%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
 <meta property="og:site_name" content="Sen&#39;s blog">
-<meta property="og:description" content="相等运算符的算法细节相等运算符的总体描述，只有一句话: 相等运算符用于比较两个值，返回true或false。 首先看下面的表达式 10 &#x3D;&#x3D; null 相等运算符算法一共有12步： 1.如果x不是正常值(比如抛出错误)，中断执行。类似使用未定义的变量进行比较(抛出错误)  2.如果y不是正常值，中断执行。 3.如果Type(x)与Type(y)相同，执行严格相等运算x &#x3D;&#x3D;&#x3D; y。 4.如果x是n">
+<meta property="og:description" content="相等运算符的算法细节相等运算符的总体描述，只有一句话: 相等运算符用于比较两个值，返回true或false。 首先看下面的表达式 10 &#x3D;&#x3D; null 相等运算符算法一共有12步： 1.如果x不是正常值(比如抛出错误)，中断执行。类似使用未定义的变量进行比较(抛出错误) 2.如果y不是正常值，中断执行。 3.如果Type(x)与Type(y)相同，执行严格相等运算x &#x3D;&#x3D;&#x3D; y。 4.如果x是nu">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/null">
+<meta property="og:image" content="http://example.com/2022/02/11/%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6/images/thumb/js.jpg">
 <meta property="article:published_time" content="2022-02-11T14:49:00.000Z">
-<meta property="article:modified_time" content="2022-02-11T15:07:21.077Z">
+<meta property="article:modified_time" content="2022-02-11T15:11:12.581Z">
 <meta property="article:author" content="小森">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/null">
+<meta name="twitter:image" content="http://example.com/2022/02/11/%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6/images/thumb/js.jpg">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -176,7 +176,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        661
+                        657
                     
                     字
                 </li>
@@ -185,7 +185,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1644592041077"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1644592272581"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -194,17 +194,13 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> == <span class="literal">null</span></span><br></pre></td></tr></table></figure>
 <p>相等运算符算法一共有12步：</p>
 <p>1.如果<code>x</code>不是正常值(比如抛出错误)，中断执行。<br>类似使用未定义的变量进行比较(抛出错误)</p>
-<p><img src="img/then_01.png" alt="步骤1"></p>
 <p>2.如果y不是正常值，中断执行。</p>
 <p>3.如果Type(x)与Type(y)相同，执行严格相等运算x === y。</p>
 <p>4.如果x是null，y是undefined，返回true。</p>
-<p><img src="img/then_02.png" alt="步骤1"></p>
 <p>5.如果x是undefined，y是null，返回true。</p>
 <p>6.如果Type(x)是数值，Type(y)是字符串，返回x == ToNumber(y)的结果。</p>
-<p><img src="img/then_03.png" alt="步骤1"></p>
 <p>7.如果Type(x)是字符串，Type(y)是数值，返回ToNumber(x) == y的结果。</p>
 <p>8.如果Type(x)是布尔值，返回ToNumber(x) == y的结果。</p>
-<p><img src="themes/kratos-rebirth/source/images/thumb/7.jpg" alt="步骤66"></p>
 <p>9.如果Type(y)是布尔值，返回x == ToNumber(y)的结果。</p>
 <p>10.如果Type(x)是字符串或数值或Symbol值，Type(y)是对象，返回x == ToPrimitive(y)的结果。</p>
 <p>11.如果Type(x)是对象，Type(y)是字符串或数值或Symbol值，返回ToPrimitive(x) == y的结果。</p>
@@ -354,7 +350,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Egret/">Egret</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TS/">TS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gulp/">gulp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mock/">mock</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rem%E9%80%82%E9%85%8D/">rem适配</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Egret/">Egret</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TS/">TS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gulp/">gulp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mock/">mock</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rem%E9%80%82%E9%85%8D/">rem适配</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
