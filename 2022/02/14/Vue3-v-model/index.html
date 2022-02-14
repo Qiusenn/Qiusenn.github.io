@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>Vue3 新特性目录 | Sen's blog</title>
+  <title>Vue3 v-model | Sen's blog</title>
   <meta name="author" content="小森" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -15,19 +15,19 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="一、简介2020年9月18日,Vue.js发布3.0版本,代号: One Piece(海贼王)https:&#x2F;&#x2F;v3.cn.vuejs.org&#x2F;  新事物的出现一定会有他的意义，所以我们先来看看Vue3相比Vue2有哪些改进呢？  1.性能的提升  打包大小减少41% 初次渲染快55% 更新渲染快133% 内存减少54%   以上数据来自官方  2.源码的升级  使用Proxy 代替 defineP">
+  <meta name="description" content="关于 Vue3 对 v-model 的语法(实现组件双向绑定) Vue2.x 语法在 2.x中，在组件上使用 v-model 相当于绑定 value prop 并触发 input 事件：  1234&lt;ChildComponent v-model:&quot;pageTitle&quot;&#x2F;&gt;&#x2F;* 是以下的简写: *&#x2F;&lt;ChildComponent :value&#x3D;&quot;pag">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue3 新特性目录">
-<meta property="og:url" content="http://example.com/2022/02/13/Vue3-%E6%96%B0%E7%89%B9%E6%80%A7%E7%9B%AE%E5%BD%95/index.html">
+<meta property="og:title" content="Vue3 v-model">
+<meta property="og:url" content="http://example.com/2022/02/14/Vue3-v-model/index.html">
 <meta property="og:site_name" content="Sen&#39;s blog">
-<meta property="og:description" content="一、简介2020年9月18日,Vue.js发布3.0版本,代号: One Piece(海贼王)https:&#x2F;&#x2F;v3.cn.vuejs.org&#x2F;  新事物的出现一定会有他的意义，所以我们先来看看Vue3相比Vue2有哪些改进呢？  1.性能的提升  打包大小减少41% 初次渲染快55% 更新渲染快133% 内存减少54%   以上数据来自官方  2.源码的升级  使用Proxy 代替 defineP">
+<meta property="og:description" content="关于 Vue3 对 v-model 的语法(实现组件双向绑定) Vue2.x 语法在 2.x中，在组件上使用 v-model 相当于绑定 value prop 并触发 input 事件：  1234&lt;ChildComponent v-model:&quot;pageTitle&quot;&#x2F;&gt;&#x2F;* 是以下的简写: *&#x2F;&lt;ChildComponent :value&#x3D;&quot;pag">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/02/13/Vue3-%E6%96%B0%E7%89%B9%E6%80%A7%E7%9B%AE%E5%BD%95/images/thumb/vue3.webp">
-<meta property="article:published_time" content="2022-02-13T15:56:42.000Z">
-<meta property="article:modified_time" content="2022-02-13T16:15:30.244Z">
+<meta property="og:image" content="http://example.com/2022/02/14/Vue3-v-model/images/thumb/vue3.webp">
+<meta property="article:published_time" content="2022-02-14T14:41:26.000Z">
+<meta property="article:modified_time" content="2022-02-14T14:42:36.533Z">
 <meta property="article:author" content="小森">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/02/13/Vue3-%E6%96%B0%E7%89%B9%E6%80%A7%E7%9B%AE%E5%BD%95/images/thumb/vue3.webp">
+<meta name="twitter:image" content="http://example.com/2022/02/14/Vue3-v-model/images/thumb/vue3.webp">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -166,17 +166,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">Vue3 新特性目录</h1>
+                <h1 class="kratos-entry-title text-center">Vue3 v-model</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-02-13</li>
+                <li><i class="fa fa-calendar"></i> 2022-02-14</li>
                 <li><i class="fa fa-user"></i> 作者 小森</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        475
+                        ~1.50K
                     
                     字
                 </li>
@@ -185,54 +185,35 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1644768930244"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1644849756533"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h1 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h1><p>2020年9月18日,Vue.js发布3.0版本,代号: One Piece(海贼王)<br><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/">https://v3.cn.vuejs.org/</a></p>
-<blockquote>
-<p>新事物的出现一定会有他的意义，所以我们先来看看Vue3相比Vue2有哪些改进呢？</p>
+            <h1 id="关于-Vue3-对-v-model-的语法-实现组件双向绑定"><a href="#关于-Vue3-对-v-model-的语法-实现组件双向绑定" class="headerlink" title="关于 Vue3 对 v-model 的语法(实现组件双向绑定)"></a>关于 <code>Vue3</code> 对 <code>v-model</code> 的语法(实现组件双向绑定)</h1><blockquote>
+<p>Vue2.x 语法<br>在 2.x中，在组件上使用 <code>v-model</code> 相当于绑定 <code>value</code> prop 并触发 <code>input</code> 事件：</p>
 </blockquote>
-<p>1.性能的提升</p>
-<ul>
-<li>打包大小减少41%</li>
-<li>初次渲染快55% 更新渲染快133%</li>
-<li>内存减少54%</li>
-</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ChildComponent v-model:<span class="string">&quot;pageTitle&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 是以下的简写: */</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ChildComponent</span> <span class="attr">:value</span>=<span class="string">&quot;pageTitle&quot;</span> @<span class="attr">input</span>=<span class="string">&quot;&quot;</span><span class="attr">pageTitle</span> = <span class="string">$event/</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-v-bind-sync"><a href="#使用-v-bind-sync" class="headerlink" title="使用 v-bind.sync"></a>使用 <code>v-bind.sync</code></h2><p>某些情况下需要对一个 prop 进行 “双向绑定” ，通常使用 <code>update:myPropName</code> 抛出一个自定义事件。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件</span></span><br><span class="line"><span class="built_in">this</span>.$emit(<span class="string">&#x27;update:title&#x27;</span>, newValue)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;ChlidComponent :title=<span class="string">&quot;pageTitle&quot;</span> <span class="meta">@update</span>:title=<span class="string">&quot;pageTitle = $event&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>方便起见，一般会对上面父组件使用 <code>.sync</code> 修饰符来缩写：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ChlidComponent :title.sync=<span class="string">&quot;pageTitle&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>以上数据来自官方</p>
+<p>Vue3.x 语法<br>在 3.x 中，自定义组件上的 <code>v-mode</code>l 相当于传递了 <code>modelValue prop</code> 并接收抛出的 <code>update:modelValue</code> 事件：</p>
 </blockquote>
-<p>2.源码的升级</p>
-<ul>
-<li>使用<code>Proxy</code> 代替 <code>defineProperty</code> 实现响应式</li>
-<li>重写虚拟<code>DOM</code>的实现和<code>Tree-Shaking</code></li>
-</ul>
-<p>3.拥抱TypeScript</p>
-<ul>
-<li>Vue3可以更好的支持<code>TypeScript</code></li>
-</ul>
-<p>4.新的特性</p>
-<ol>
-<li>Composition API (组合式API)</li>
-</ol>
-<ul>
-<li><code>setup</code> 配置</li>
-<li><code>ref</code> 与 <code>reactive</code></li>
-<li><code>watch</code> 与 <code>watchEffect</code></li>
-<li><code>provide</code> 与 <code>inject</code></li>
-</ul>
-<p>2.新的内置组件</p>
-<ul>
-<li><code>Fragment</code></li>
-<li><code>Teleport</code></li>
-<li><code>Supense</code></li>
-</ul>
-<p>3.其他改变</p>
-<ul>
-<li>新的生命周期钩子</li>
-<li><code>data</code> 选项应始终被声明为一个函数</li>
-<li>移除 <code>keyCode</code> 支持作为 <code>v-on</code> 的修饰符</li>
-</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ChildComponent v-model=<span class="string">&quot;pageTitle&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 是以下的简写:  */</span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ChildComponent</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">  <span class="attr">:modelValue</span>=<span class="string">&quot;pageTitle&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">  @<span class="attr">update:modelValue</span>=<span class="string">&quot;pageTitle = $event&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">/&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="v-model-参数"><a href="#v-model-参数" class="headerlink" title="v-model 参数"></a><code>v-model</code> 参数</h2><p>可以为 <code>v-model</code> 传递一个参数，以作为组件内 <code>model</code> 选项的替代：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ChildComponent v-model:title=<span class="string">&quot;pageTitle&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 是以下的简写:  */</span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ChildComponent</span> <span class="attr">:title</span>=<span class="string">&quot;pageTitle&quot;</span> @<span class="attr">update:title</span>=<span class="string">&quot;pageTitle = $event&quot;</span> /&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Vue3.x</code> <code>prop</code> 双向绑定 迁移策略<br>将原有的 <code>.sync</code> 的部分替换为 <code>v-model</code> : </p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;ChlidComponent :title.sync=<span class="string">&quot;pageTitle&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">替换为</span><br><span class="line"></span><br><span class="line">&lt;ChlidComponent v-model:title=<span class="string">&quot;pageTitle&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 子组件触发方式 */</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">  <span class="keyword">import</span> &#123;defineEmits&#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">  <span class="comment">// 定义触发事件</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">  <span class="keyword">const</span> emits = defineEmits([<span class="string">&#x27;update:pageTitle&#x27;</span>])</span></span></span><br><span class="line"><span class="javascript"><span class="xml">  <span class="comment">// 触发</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">  emits(<span class="string">&#x27;update:pageTitle&#x27;</span>, 传值)</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -286,7 +267,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2022/02/13/Vue3-%E6%96%B0%E7%89%B9%E6%80%A7%E7%9B%AE%E5%BD%95/",
+                text: "http://example.com/2022/02/14/Vue3-v-model/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -298,13 +279,12 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2022/02/13/Vue3-%E6%96%B0%E7%89%B9%E6%80%A7%E7%9B%AE%E5%BD%95/";
-            const title         = "「Vue3 新特性目录」";
-            const excerpt       = `一、简介2020年9月18日,Vue.js发布3.0版本,代号: One Piece(海贼王)https://v3.cn.vuejs.org/
+            const hostUrl       = "http://example.com/2022/02/14/Vue3-v-model/";
+            const title         = "「Vue3 v-model」";
+            const excerpt       = `关于 Vue3 对 v-model 的语法(实现组件双向绑定)
+Vue2.x 语法在 2.x中，在组件上使用 v-model 相当于绑定 value prop 并触发 input 事件：
 
-新事物的出现一定会有他的意义，所以我们先来看看Vue3相比Vue2有哪些改进呢？
-
-1....`;
+1234&lt;ChildComponent...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -335,12 +315,12 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 相等运算符" href="/2022/02/11/相等运算符/">&lt; 上一篇</a>
+                <a title=" Vue3 新特性目录" href="/2022/02/13/Vue3-新特性目录/">&lt; 上一篇</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" Vue3 v-model" href="/2022/02/14/Vue3-v-model/">下一篇 &gt;</a>
+                <a title=" script-setup单文件组件语法糖" href="/2022/02/14/script-setup单文件组件语法糖/">下一篇 &gt;</a>
             </div>
             
         </nav>

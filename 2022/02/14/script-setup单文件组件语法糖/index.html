@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="">
+  <title>script-setup单文件组件语法糖 | Sen's blog</title>
+  <meta name="author" content="小森" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="&lt;script setup&gt; 单文件组件语法糖&lt;script setup&gt; 是在单文件组件 (SFC) 中使用 组合式 API 的编译时语法糖。相比于普通的 &lt;script&gt; 语法，它具有更多优势：  更好的样板内容，更简洁的代码。 能够使用纯 TypeScript 生命 props 和抛出事件。 更好的运行时性能 (其模板会被编译成与其同一作用域的渲染函数，没">
+<meta property="og:type" content="article">
+<meta property="og:title" content="script-setup单文件组件语法糖">
+<meta property="og:url" content="http://example.com/2022/02/14/script-setup%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E8%AF%AD%E6%B3%95%E7%B3%96/index.html">
+<meta property="og:site_name" content="Sen&#39;s blog">
+<meta property="og:description" content="&lt;script setup&gt; 单文件组件语法糖&lt;script setup&gt; 是在单文件组件 (SFC) 中使用 组合式 API 的编译时语法糖。相比于普通的 &lt;script&gt; 语法，它具有更多优势：  更好的样板内容，更简洁的代码。 能够使用纯 TypeScript 生命 props 和抛出事件。 更好的运行时性能 (其模板会被编译成与其同一作用域的渲染函数，没">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/02/14/script-setup%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E8%AF%AD%E6%B3%95%E7%B3%96/images/thumb/vue3.webp">
+<meta property="article:published_time" content="2022-02-14T14:43:33.000Z">
+<meta property="article:modified_time" content="2022-02-14T14:47:47.231Z">
+<meta property="article:author" content="小森">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/02/14/script-setup%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E8%AF%AD%E6%B3%95%E7%B3%96/images/thumb/vue3.webp">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner_dark.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/aboutMe/"><i class="fa fa-user-o"></i>关于我</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://qiusenn.github.io/">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Qiusenn/Qiusenn.github.io">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Sen&#39;s blog</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Sen&#39;s blog</h2> <br />
+                        <span>Full stack engineer of the future</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">script-setup单文件组件语法糖</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-02-14</li>
+                <li><i class="fa fa-user"></i> 作者 小森</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~3.57K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1644850067231"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h1 id="lt-script-setup-gt-单文件组件语法糖"><a href="#lt-script-setup-gt-单文件组件语法糖" class="headerlink" title="&lt;script setup&gt; 单文件组件语法糖"></a><code>&lt;script setup&gt;</code> 单文件组件语法糖</h1><p><code>&lt;script setup&gt;</code> 是在单文件组件 (SFC) 中使用 <code>组合式 API</code> 的编译时语法糖。相比于普通的 <code>&lt;script&gt;</code> 语法，它具有更多优势：</p>
+<ul>
+<li>更好的样板内容，更简洁的代码。</li>
+<li>能够使用纯 <code>TypeScript</code> 生命 <code>props</code> 和抛出事件。</li>
+<li>更好的运行时性能 (其模板会被编译成与其同一作用域的渲染函数，没有任何的中间代理)。</li>
+<li>更好的 IDE 类型推断性能 (减少语言服务器从代码中抽离类型的工作)。</li>
+</ul>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><hr>
+<p>将 setup attribute 添加到 <code>&lt;script&gt;</code> 代码块上:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>script setup<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>基本语法<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">  console.log(&#x27;hello script setup&#x27;)</span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>里面的代码会被编译成组件 <code>setup()</code> 函数的内容。和普通 <code>&lt;script&gt;</code> 标签不同， <code>&lt;script setup&gt;</code> 中的代码会在<strong>每次组件实例被创建的时候执行</strong>。</p>
+<h2 id="顶层的绑定会被暴露给模板"><a href="#顶层的绑定会被暴露给模板" class="headerlink" title="顶层的绑定会被暴露给模板"></a>顶层的绑定会被暴露给模板</h2><p>当使用 <code>&lt;script setup&gt;</code> 的时候，任何在 <code>&lt;script setup&gt;</code> 声明的顶层的绑定 (包括变量，函数声明，以及 import 引入的内容) 都能在模板中直接使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>script setup<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>基本语法<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;log&quot;</span>&gt;</span>&#123;&#123; count &#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">  // 变量</span><br><span class="line">  const count = 1</span><br><span class="line">  // 函数</span><br><span class="line">  const log = () =&gt; console.log(count)</span><br><span class="line">  console.log(&#x27;hello script setup&#x27;)</span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>也可以直接 <code>import</code> 导入定义好的js文件工具函数，并且可以直接在模板中直接使用导入的 <code>helper</code> 函数，并不需要通过 <code>methods</code> 选项来暴露它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  <span class="keyword">import</span> &#123;helper&#125; <span class="keyword">from</span> <span class="string">&#x27;./helper&#x27;</span></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123; helper(&#x27;vue&#x27;) &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// helper.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> helper = <span class="function"><span class="params">name</span> =&gt;</span> <span class="string">&#x27;hello&#x27;</span> + name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应式"><a href="#响应式" class="headerlink" title="响应式"></a>响应式</h2><hr>
+<p>使用响应式数据需要引用 <code>ref</code> , <code>ref</code> 值在模板中使用的时候会自动解包(当数据更新页面数据也需要同步更新时用 <code>ref()包裹</code> ，若为引用类型数据时用 <code>reactive()</code> 包裹)：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  <span class="keyword">import</span> &#123; ref , reactive&#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> count = ref(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">let</span> obj = reactive([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;count++&quot;</span>&gt;</span>&#123;&#123; count &#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用组件"><a href="#使用组件" class="headerlink" title="使用组件"></a>使用组件</h2><hr>
+<p><code>&lt;script setup&gt;</code> 范围里的值也能被直接作为自定义组件的标签名使用,不需要在 <code>components</code> 内注册：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  <span class="keyword">import</span> MyComponent <span class="keyword">from</span> <span class="string">&#x27;./MyComponent.vue&#x27;</span></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="defineProps-、-defineEmits-、-defineExpose"><a href="#defineProps-、-defineEmits-、-defineExpose" class="headerlink" title="defineProps 、 defineEmits 、 defineExpose"></a><code>defineProps</code> 、 <code>defineEmits</code> 、 <code>defineExpose</code></h2><hr>
+<p>在 <code>&lt;script setup&gt;</code> 中必须使用 <code>defineProps</code> 和 <code>defineEmits API</code> 来声明 <code>props</code> 和 <code>emits</code></p>
+<p>使用 <code>&lt;script setup&gt;</code> 的组件是默认关闭的，也即通过模板 ref 或者 $parent 链获取到的组件的公开实例，不会暴露任何在 <code>&lt;script setup&gt;</code> 中声明的绑定。</p>
+<p>为了在 <code>&lt;script setup&gt;</code> 组件中明确要暴露出去的属性，使用 defineExpose 编译器宏：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// father</span></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">  <span class="keyword">import</span> MyComponent <span class="keyword">from</span> <span class="string">&#x27;./MyComponent.vue&#x27;</span></span><br><span class="line">  <span class="keyword">import</span> &#123; ref, onMounted &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line">  <span class="comment">// 传递的变量</span></span><br><span class="line">  <span class="keyword">let</span> count = ref(<span class="number">0</span>);</span><br><span class="line">  <span class="comment">// 获取dom</span></span><br><span class="line">  <span class="keyword">const</span> component = ref(<span class="literal">null</span>);</span><br><span class="line">  <span class="comment">// 在setup挂载后时获取子组件暴露出的变量</span></span><br><span class="line">  onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(component.value.exposeNum)</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="comment">&lt;!-- 接收自定义事件，执行表达式 --&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">ref</span>=<span class="string">&quot;component&quot;</span> <span class="attr">:count</span>=<span class="string">&quot;count&quot;</span> @<span class="attr">updata:count</span>=<span class="string">&quot;count++&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// child</span></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">  <span class="keyword">import</span> MyComponent <span class="keyword">from</span> <span class="string">&#x27;./MyComponent.vue&#x27;</span></span><br><span class="line">  <span class="keyword">import</span> &#123; defineProps, defineEmits, defineExpose &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line">  <span class="comment">// 接收 props</span></span><br><span class="line">  <span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">    <span class="attr">count</span>: <span class="built_in">Number</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="built_in">console</span>.log(props.count.value) <span class="comment">// 0</span></span><br><span class="line">  <span class="comment">// 声明需要触发的自定义事件</span></span><br><span class="line">  <span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;updata:count&#x27;</span>])</span><br><span class="line">  <span class="keyword">const</span> exposeNum = <span class="number">1</span></span><br><span class="line">  <span class="comment">// 将exposeNum暴露出去</span></span><br><span class="line">  defineExpose(&#123;</span><br><span class="line">    exposeNum</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">h5</span>&gt;</span>&#123;&#123; count &#125;&#125;<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="comment">&lt;!-- 触发自定义事件 --&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;emit(&#x27;updata:count&#x27;)&quot;</span>&gt;</span>点击累加父组件的prop(count)<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>-- end --</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2022/02/14/script-setup%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E8%AF%AD%E6%B3%95%E7%B3%96/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2022/02/14/script-setup%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E8%AF%AD%E6%B3%95%E7%B3%96/";
+            const title         = "「script-setup单文件组件语法糖」";
+            const excerpt       = `&lt;script setup&gt; 单文件组件语法糖&lt;script setup&gt; 是在单文件组件 (SFC) 中使用 组合式 API 的编译时语法糖。相比于普通的 &lt;script&gt; 语法，它具有更多优势：...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-02-14</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Vue3 v-model" href="/2022/02/14/Vue3-v-model/">&lt; 上一篇</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">To be the person you want to be</p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Egret/">Egret</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TS/">TS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gulp/">gulp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mock/">mock</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rem%E9%80%82%E9%85%8D/">rem适配</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/script-setup%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E8%AF%AD%E6%B3%95%E7%B3%96/"><i class="fa  fa-book"></i> script-setup单文件组件语法糖</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/Vue3-v-model/"><i class="fa  fa-book"></i> Vue3 v-model</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/13/Vue3-%E6%96%B0%E7%89%B9%E6%80%A7%E7%9B%AE%E5%BD%95/"><i class="fa  fa-book"></i> Vue3 新特性目录</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/11/%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6/"><i class="fa  fa-book"></i> 相等运算符</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/01/06/egretRunBug%E8%A7%A3%E5%86%B3/"><i class="fa  fa-book"></i> egretRunBug解决</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://t.me/CandyUnion"><i class="fa fa-telegram"></i></a></li>
+                        
+                        
+                        
+                        <li><a target="_blank" rel="me" href="https://nya.one/@qiusenn"><i class="fa fa fa-share-alt-square"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/qiusenn"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 Sen's blog.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by 小森.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
