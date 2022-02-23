@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>TypeScript-泛型 | Sen's blog</title>
+  <title>Redux | Sen's blog</title>
   <meta name="author" content="小森" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -15,19 +15,19 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。 不使用泛型的函数是这个例子 (该函数表示传入的arg参数直接被约束为number类型，并且函数的返回值也被约束为number类型) 这样函数就没有可复用性。 123function identity(arg: number): number &amp;#123;    return arg;&amp;#125">
+  <meta name="description" content="redux Redux 是 JavaScript 状态容器，提供可预测化的状态管理。  安装: 12npm install --save reduxnpm install --save react-redux &#x2F;&#x2F; 附加包  创建一个简单的store： 12345678910111213141516171819202122232425262728&#x2F;** * 这是一个 reducer，形式为 (st">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TypeScript-泛型">
-<meta property="og:url" content="http://example.com/2021/12/30/TypeScript-%E6%B3%9B%E5%9E%8B/index.html">
+<meta property="og:title" content="Redux">
+<meta property="og:url" content="http://example.com/2022/02/23/Redux/index.html">
 <meta property="og:site_name" content="Sen&#39;s blog">
-<meta property="og:description" content="使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。 不使用泛型的函数是这个例子 (该函数表示传入的arg参数直接被约束为number类型，并且函数的返回值也被约束为number类型) 这样函数就没有可复用性。 123function identity(arg: number): number &amp;#123;    return arg;&amp;#125">
+<meta property="og:description" content="redux Redux 是 JavaScript 状态容器，提供可预测化的状态管理。  安装: 12npm install --save reduxnpm install --save react-redux &#x2F;&#x2F; 附加包  创建一个简单的store： 12345678910111213141516171819202122232425262728&#x2F;** * 这是一个 reducer，形式为 (st">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/12/30/TypeScript-%E6%B3%9B%E5%9E%8B/images/thumb/ts.jpg">
-<meta property="article:published_time" content="2021-12-30T14:00:59.000Z">
-<meta property="article:modified_time" content="2021-12-30T14:29:15.001Z">
+<meta property="og:image" content="http://example.com/null">
+<meta property="article:published_time" content="2022-02-23T15:47:23.000Z">
+<meta property="article:modified_time" content="2022-02-23T15:47:45.896Z">
 <meta property="article:author" content="小森">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/12/30/TypeScript-%E6%B3%9B%E5%9E%8B/images/thumb/ts.jpg">
+<meta name="twitter:image" content="http://example.com/null">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -166,17 +166,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">TypeScript-泛型</h1>
+                <h1 class="kratos-entry-title text-center">Redux</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-12-30</li>
+                <li><i class="fa fa-calendar"></i> 2022-02-23</li>
                 <li><i class="fa fa-user"></i> 作者 小森</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~1.88K
+                        ~1.89K
                     
                     字
                 </li>
@@ -185,34 +185,54 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1640874555001"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1645631265896"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h2 id="使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。-这样用户就可以以自己的数据类型来使用组件。"><a href="#使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。-这样用户就可以以自己的数据类型来使用组件。" class="headerlink" title="使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。"></a>使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。</h2><hr>
-<p>不使用泛型的函数是这个例子 (该函数表示传入的arg参数直接被约束为<code>number</code>类型，并且函数的返回值也被约束为number类型) 这样函数就没有可复用性。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity</span>(<span class="params">arg: number</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h2><blockquote>
+<p>Redux 是 JavaScript 状态容器，提供可预测化的状态管理。</p>
+</blockquote>
+<p>安装:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save redux</span><br><span class="line">npm install --save react-redux <span class="comment">// 附加包</span></span><br></pre></td></tr></table></figure>
 
-<p>再或者使用<code>any</code>类型来定义函数 (使用<code>any</code>类型会导致这个函数可以接收任何类型的<code>arg</code>参数，这样就丢失了一些信息：传入的类型应该与返回的类型相同。如果传入一个数字，我们只知道任何类型的值都有可能被返回) 存在返回类型不明确。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity</span>(<span class="params">arg: any</span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个简单的store：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这是一个 reducer，形式为 (state, action) =&gt; state 的纯函数。</span></span><br><span class="line"><span class="comment"> * 描述了 action 如何把 state 转变成下一个 state。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * state 的形式取决于你，可以是基本类型、数组、对象、</span></span><br><span class="line"><span class="comment"> * 惟一的要点是:</span></span><br><span class="line"><span class="comment"> * 当 state 变化时需要返回全新的对象，而不是修改传入的参数。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 下面例子使用 `switch` 语句和字符串来做判断</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = <span class="function">(<span class="params">state = <span class="number">1</span>, action</span>) =&gt;</span> &#123;</span><br><span class="line">  &#123; type, preload&#125; = action;</span><br><span class="line">  <span class="keyword">switch</span>(type) &#123;</span><br><span class="line">    <span class="attr">case</span>: <span class="string">&#x27;ADD&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + preload;</span><br><span class="line">    <span class="keyword">case</span>: <span class="string">&#x27;DEC&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state - preload;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 Redux store 来存放应用的状态。</span></span><br><span class="line"><span class="comment">// API 是 &#123; subscribe, dispatch, getState &#125;。</span></span><br><span class="line"><span class="keyword">let</span> store = createStore(counter);</span><br></pre></td></tr></table></figure>
 
-<p>需要传入类型和返回类型相同时，使用 类型变量，它是一种特殊的变量，只用于表示类型而不是值 <code>T</code>。（该函数表示给<code>identity</code>添加类型变量<code>T</code>.<code>T</code>帮助我们捕获用户传入的类型(比如: <code>number</code>),之后使用这个类型，将<code>T</code>类型当做返回值类型。这样就能知道参数类型与返回值类型相同了。这允许我们跟踪函数里使用的类型的信息。）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们把这个版本的identity函数叫做泛型，因为它可以适用于多个类型。 不同于使用 any，它不会丢失信息，像第一个例子那像保持准确性，传入数值类型并返回数值类型。</p>
-<p>利用了类型推论 – 即编译器会根据传入的参数自动地帮助我们确定T的类型：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> output = identity(<span class="string">&quot;myString&quot;</span>);  <span class="comment">// type of output will be &#x27;string&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><code>let store = createStore(counter)</code> 打印store看看<br><img src="'assets/images/store.png'" alt="Image text"></p>
+<ul>
+<li><code>dispacth</code> (用于提交action)</li>
+<li><code>getState</code> (用于获取store数据)</li>
+<li><code>subScribe</code> (用于监听store数据的变化)</li>
+</ul>
+<ol>
+<li><code>dispatch</code> 提交修改store内数据</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store.dispatch(&#123;<span class="attr">type</span>: <span class="string">&#x27;ADD&#x27;</span>, <span class="attr">preload</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><code>getState</code> (用于获取store数据)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store.getState() <span class="comment">// 由于上次已经提交过一次修改 此时store的数据为1</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><code>subScribe</code> (用于监听store数据的变化,数据变化执行回调)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store.subsubScribe( <span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;数据变化了,变化的值为=&gt;&#x27;</span>, store.getState()))</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>使用泛型变量<br>如果我们想在函数中打印传入的 <code>number</code> 或者 <code>string</code> 的长度时:<br>使用泛型创建像identity这样的泛型函数时，编译器要求你必须把这些参数当做是任意或所有类型。</p>
+<p>当出现多个需要store的数据时，使用 <code>combineReducers</code></p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loggingIdentity</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg.length);  <span class="comment">// Error: T doesn&#x27;t have .length</span></span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;combineReducers, createStore&#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p>为什么会报错呢? (因为没有地方指明<code>arg</code>具有<code>length</code>这个属性。 记住，这些类型变量代表的是任意类型，所以使用这个函数的人可能传入的是个数字，而数字是没有 <code>.length</code>属性的。)</p>
-<p>假设传入的<code>arg</code>类型为数组类型时,可以这样解决：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loggingIdentity</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T[]</span>): <span class="title">T</span>[] </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg.length);  <span class="comment">// Array has a .length, so no more error</span></span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loggingIdentity</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: <span class="built_in">Array</span>&lt;T&gt;</span>): <span class="title">Array</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg.length);  <span class="comment">// Array has a .length, so no more error</span></span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>reducer数据:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">state = <span class="number">1</span>, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;type, payload&#125; = action;</span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ADD&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + payload;</span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>如果是字符串时 使用泛型约束<br>当我们知道函数中存在length属性时，为此定义一个接口来描述约束条件。创建一个包含length属性的接口，使用这个接口和extends关键字来实现约束：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">interface Lengthwise &#123;</span><br><span class="line">    <span class="attr">length</span>: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loggingIdentity</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">Lengthwise</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg.length);  <span class="comment">// Now we know it has a .length property, so no more error</span></span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line">loggingIdentity(<span class="string">&quot;myString&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>onther数据:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> another = <span class="function">(<span class="params">state = <span class="number">1</span>, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;type, payload&#125; = action;</span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ADDO_OTHER&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + payload;</span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>将两个数据合并：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> todoApp = combineReducers(&#123;</span><br><span class="line">  reducer,</span><br><span class="line">  onther,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -265,7 +285,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2021/12/30/TypeScript-%E6%B3%9B%E5%9E%8B/",
+                text: "http://example.com/2022/02/23/Redux/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -277,10 +297,15 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2021/12/30/TypeScript-%E6%B3%9B%E5%9E%8B/";
-            const title         = "「TypeScript-泛型」";
-            const excerpt       = `使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。
-不使用泛型的函数是这个例子 (该函数表示传入的arg参数直接被约束为number类型，并且函数的返回值也被约束为number类型...`;
+            const hostUrl       = "http://example.com/2022/02/23/Redux/";
+            const title         = "「Redux」";
+            const excerpt       = `redux
+Redux 是 JavaScript 状态容器，提供可预测化的状态管理。
+
+安装:
+12npm install --save reduxnpm install --save react-redux // 附加包
+
+创建一个...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -302,7 +327,7 @@
                     
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-12-30</span>
+                <span>最后编辑：2022-02-23</span>
                 </div>
             </div>
         </footer>
@@ -311,13 +336,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" mockjs使用" href="/2021/12/30/mockjs使用/">&lt; 上一篇</a>
+                <a title=" 装饰器" href="/2022/02/23/装饰器/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" inquirer.js命令行交互工具的使用" href="/2022/01/06/inquirer-js命令行交互工具的使用/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
