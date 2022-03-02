@@ -22,12 +22,12 @@
 <meta property="og:site_name" content="Sen&#39;s blog">
 <meta property="og:description" content="redux Redux 是 JavaScript 状态容器，提供可预测化的状态管理。  安装: 12npm install --save reduxnpm install --save react-redux &#x2F;&#x2F; 附加包  创建一个简单的store： 12345678910111213141516171819202122232425262728&#x2F;** * 这是一个 reducer，形式为 (st">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/null">
+<meta property="og:image" content="http://example.com/2022/02/23/Redux/images/thumb/react.webp">
 <meta property="article:published_time" content="2022-02-23T15:47:23.000Z">
-<meta property="article:modified_time" content="2022-02-23T15:47:45.896Z">
+<meta property="article:modified_time" content="2022-03-02T14:52:07.940Z">
 <meta property="article:author" content="小森">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/null">
+<meta name="twitter:image" content="http://example.com/2022/02/23/Redux/images/thumb/react.webp">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -185,7 +185,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1645631265896"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1646232727940"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -225,7 +225,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;combineReducers, createStore&#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>reducer数据:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">state = <span class="number">1</span>, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;type, payload&#125; = action;</span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ADD&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + payload;</span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">state = <span class="number">1</span>, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;type, payload&#125; = action;</span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ADD&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + payload;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>onther数据:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> another = <span class="function">(<span class="params">state = <span class="number">1</span>, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;type, payload&#125; = action;</span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ADDO_OTHER&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> state + payload;</span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -327,7 +327,7 @@ Redux 是 JavaScript 状态容器，提供可预测化的状态管理。
                     
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-02-23</span>
+                <span>最后编辑：2022-03-02</span>
                 </div>
             </div>
         </footer>
@@ -375,7 +375,7 @@ Redux 是 JavaScript 状态容器，提供可预测化的状态管理。
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Egret/">Egret</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TS/">TS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gulp/">gulp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mock/">mock</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rem%E9%80%82%E9%85%8D/">rem适配</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Egret/">Egret</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TS/">TS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gulp/">gulp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mock/">mock</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rem%E9%80%82%E9%85%8D/">rem适配</a><span class="category-list-count">1</span></li></ul>
   </aside>
 
 
