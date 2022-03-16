@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="">
+  <title>React Hook四个钩子 | Sen's blog</title>
+  <meta name="author" content="小森" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="react四个钩子用法一、组件类的缺点React 的核心是组件。v16.8 版本之前，组件的标准写法是类（class）。下面是一个简单的组件类。 123456789101112131415import React, &amp;#123;Component&amp;#125; from &amp;#x27;react&amp;#x27;export default class Button extends Component &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Hook四个钩子">
+<meta property="og:url" content="http://example.com/2022/03/17/ReactHook%E5%9B%9B%E4%B8%AA%E9%92%A9%E5%AD%90/index.html">
+<meta property="og:site_name" content="Sen&#39;s blog">
+<meta property="og:description" content="react四个钩子用法一、组件类的缺点React 的核心是组件。v16.8 版本之前，组件的标准写法是类（class）。下面是一个简单的组件类。 123456789101112131415import React, &amp;#123;Component&amp;#125; from &amp;#x27;react&amp;#x27;export default class Button extends Component &amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/03/17/ReactHook%E5%9B%9B%E4%B8%AA%E9%92%A9%E5%AD%90/images/thumb/ReactHooks.jpg">
+<meta property="article:published_time" content="2022-03-16T16:06:50.000Z">
+<meta property="article:modified_time" content="2022-03-16T16:41:11.079Z">
+<meta property="article:author" content="小森">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/03/17/ReactHook%E5%9B%9B%E4%B8%AA%E9%92%A9%E5%AD%90/images/thumb/ReactHooks.jpg">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner_dark.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/aboutMe/"><i class="fa fa-user-o"></i>关于我</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://qiusenn.github.io/">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Qiusenn/Qiusenn.github.io">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">Sen&#39;s blog</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>Sen&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">React Hook四个钩子</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-03-17</li>
+                <li><i class="fa fa-user"></i> 作者 小森</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~8.14K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1647448871079"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h1 id="react四个钩子用法"><a href="#react四个钩子用法" class="headerlink" title="react四个钩子用法"></a>react四个钩子用法</h1><h2 id="一、组件类的缺点"><a href="#一、组件类的缺点" class="headerlink" title="一、组件类的缺点"></a>一、组件类的缺点</h2><p>React 的核心是组件。v16.8 版本之前，组件的标准写法是类（class）。下面是一个简单的组件类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      <span class="attr">text</span>: <span class="string">&#x27;Click me, please!&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  clickHandle = <span class="function">() =&gt;</span> &#123;<span class="built_in">this</span>.setState(&#123;<span class="attr">text</span>: <span class="string">&#x27;You click me!&#x27;</span>&#125;)&#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.clickHandle&#125;</span>&gt;</span>&#123;this.state.text&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上段代码仅仅是渲染一个button及其简单的交互，需要的代码已经很多了。如果配上redux就会产生更复杂的代码。</p>
+<blockquote>
+<p>组件类的缺点</p>
+</blockquote>
+<ul>
+<li>大型组件很难拆分和重构，也很难测试。</li>
+<li>业务逻辑分散在组件的各个方法之中，导致重复逻辑或关联逻辑。</li>
+<li>组件类引入了复杂的编程模式，比如 render props 和高阶组件。</li>
+</ul>
+<h2 id="二、函数组件"><a href="#二、函数组件" class="headerlink" title="二、函数组件"></a>二、函数组件</h2><blockquote>
+<p>组件的最佳写法应该是函数，而不是类。<br>将上段组件类写法更改为函数式组件</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;useState&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">Button</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [text, setText] = useState(<span class="string">&#x27;Click me, please!&#x27;</span>);</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">clickHanlde</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> setText(<span class="string">&#x27;You click me!&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;clickHanlde&#125;</span>&gt;</span>&#123;text&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>函数式组件的缺点</p>
+</blockquote>
+<ul>
+<li>必须是纯函数，不能包含状态，也不支持生命周期方法，因此无法取代类。(所以需要使用react-hook)</li>
+</ul>
+<blockquote>
+<h5 id="React-Hooks-的设计目的，就是加强版函数组件，完全不使用”类”，就能写出一个全功能的组件。"><a href="#React-Hooks-的设计目的，就是加强版函数组件，完全不使用”类”，就能写出一个全功能的组件。" class="headerlink" title="React Hooks 的设计目的，就是加强版函数组件，完全不使用”类”，就能写出一个全功能的组件。"></a><span style="color:red">React Hooks 的设计目的，就是加强版函数组件，完全不使用”类”，就能写出一个全功能的组件。</span></h5></blockquote>
+<h2 id="三、Hook的含义-重点"><a href="#三、Hook的含义-重点" class="headerlink" title="三、Hook的含义(重点)"></a>三、Hook的含义(重点)</h2><ol>
+<li><p>Hook 这个单词的意思是”钩子”。</p>
+</li>
+<li><p>React Hooks 的意思是，组件尽量写成纯函数，如果需要外部功能和副作用，就用钩子把外部代码”钩”进来。 React Hooks 就是那些钩子。</p>
+</li>
+<li><p>你需要什么功能，就使用什么钩子。React 默认提供了一些常用钩子，你也可以封装自己的钩子。</p>
+</li>
+<li><p>所有的钩子都是为函数引入外部功能，所以 React 约定，钩子一律使用use前缀命名，便于识别。你要使用 xxx 功能，钩子就命名为 usexxx。</p>
+</li>
+</ol>
+<p>下面介绍 React 默认提供的四个最常用的钩子。</p>
+<table>
+<thead>
+<tr>
+<th>钩子</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>useState</td>
+<td>状态钩子</td>
+</tr>
+<tr>
+<td>useContext</td>
+<td>共享状态钩子</td>
+</tr>
+<tr>
+<td>useReducer</td>
+<td>action 钩子</td>
+</tr>
+<tr>
+<td>useEffect</td>
+<td>副作用钩子</td>
+</tr>
+</tbody></table>
+<h3 id="1-useState-状态钩子"><a href="#1-useState-状态钩子" class="headerlink" title="1. useState(状态钩子)"></a>1. useState(状态钩子)</h3><p><code>useState()</code>用于为函数组件引入状态（<code>state</code>）。纯函数不能有状态，所以把状态放在钩子里面(<strong>用于在函数式组件中存放数据状态</strong>)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入useState</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;useState&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">Button</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * useState(参数) 返回两个参数</span></span><br><span class="line"><span class="comment">   * 1. 定义变量接收初始数据</span></span><br><span class="line"><span class="comment">   * 2. 用于修改初始数据的函数</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">const</span> [text, setText] = useState(<span class="string">&#x27;Click me, please!&#x27;</span>);</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">clickHanlde</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 修改数据</span></span><br><span class="line">    <span class="keyword">return</span> setText(<span class="string">&#x27;You click me!&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;clickHanlde&#125;</span>&gt;</span>&#123;text&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，Button 组件是一个函数，内部使用useState()钩子引入状态。</p>
+<p>useState()这个函数接受状态的初始值，作为参数，上例的初始值为按钮的文字。该函数返回一个数组，数组的第一个成员是一个变量（上例是text），指向状态的当前值。第二个成员是一个函数，用来更新状态，约定是set前缀加上状态的变量名（上例是setText）。</p>
+<h3 id="2-useContext-共享状态钩子"><a href="#2-useContext-共享状态钩子" class="headerlink" title="2. useContext(共享状态钩子)"></a>2. useContext(共享状态钩子)</h3><p>如果需要在组件之间共享状态，可以使用useContext()。<br>现在相对两个组件实现对useState的数据(contentText)，实现数据共享，并且子组件可以修改共享数据的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">ConParent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [contentText, setContentText] = useState(<span class="string">&#x27;111&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">ConChildFirst</span>&gt;</span><span class="tag">&lt;/<span class="name">ConChildFirst</span>&gt;</span></span></span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">ConChildSecond</span>&gt;</span><span class="tag">&lt;/<span class="name">ConChildSecond</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一步、使用 React Context API，在组件外部建立一个 Context。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const AppContext = React.createContext(&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>第二步、使用<code>&lt;AppContext.Provider value=&#123;&#125;&gt;&lt;/AppContext.Provider&gt;</code>包裹想要进行数据共享的多个组件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">ConParent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [contentText, setContentText] = useState(<span class="string">&#x27;111&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="comment">// value传递对象&#123;传递参数或函数&#125;给子组件实现数据共享</span></span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">AppContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;&#123;contentText:</span> <span class="attr">contentText</span>, <span class="attr">setContentText:</span> <span class="attr">setContentText</span>&#125;&#125;&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">ConChildFirst</span>&gt;</span><span class="tag">&lt;/<span class="name">ConChildFirst</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">ConChildSecond</span>&gt;</span><span class="tag">&lt;/<span class="name">ConChildSecond</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">AppContext.Provider</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后、在子组件useContext()钩子函数用来引入 Context 对象，从中获取username属性。<br><strong>接收数据以及更改数据的函数实现多个组件共享一个数据。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ConChildFirst</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// useContext()钩子函数用来引入 Context 对象</span></span><br><span class="line">  <span class="keyword">const</span> &#123; contentText, setContentText &#125; = useContext(AppContext);</span><br><span class="line">  <span class="keyword">const</span> clickHandle = <span class="function">() =&gt;</span> setContentText(<span class="string">&#x27;666&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;clickHandle&#125;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;display:</span> &#x27;<span class="attr">block</span>&#x27;&#125;&#125;&gt;</span>ConChildFirst =&gt; &#123;contentText&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ConChildSecond</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// useContext()钩子函数用来引入 Context 对象</span></span><br><span class="line">  <span class="keyword">const</span> &#123; contentText, setContentText &#125; = useContext(AppContext);</span><br><span class="line">  <span class="keyword">const</span> clickHandle = <span class="function">() =&gt;</span> setContentText(<span class="string">&#x27;666&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;clickHandle&#125;</span>&gt;</span>ConChildSecond =&gt; &#123;contentText&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完整代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;useState, useContext&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 React Context API，在组件外部建立一个 Context。</span></span><br><span class="line"><span class="keyword">const</span> AppContext = React.createContext(&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">ConParent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [contentText, setContentText] = useState(<span class="string">&#x27;111&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">AppContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;&#123;contentText:</span> <span class="attr">contentText</span>, <span class="attr">setContentText:</span> <span class="attr">setContentText</span>&#125;&#125;&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">ConChildFirst</span>&gt;</span><span class="tag">&lt;/<span class="name">ConChildFirst</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">ConChildSecond</span>&gt;</span><span class="tag">&lt;/<span class="name">ConChildSecond</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">AppContext.Provider</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ConChildFirst</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; contentText &#125; = useContext(AppContext);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">style</span>=<span class="string">&#123;&#123;display:</span> &#x27;<span class="attr">block</span>&#x27;&#125;&#125;&gt;</span>ConChildFirst =&gt; &#123;contentText&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ConChildSecond</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; contentText, setContentText &#125; = useContext(AppContext);</span><br><span class="line">  <span class="keyword">const</span> clickHandle = <span class="function">() =&gt;</span> setContentText(<span class="string">&#x27;666&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;clickHandle&#125;</span>&gt;</span>ConChildSecond =&gt; &#123;contentText&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-useReducer-action钩子"><a href="#3-useReducer-action钩子" class="headerlink" title="3.useReducer(action钩子)"></a>3.useReducer(action钩子)</h3><p>React 本身不提供状态管理功能，通常需要使用外部库。这方面最常用的库是 Redux。</p>
+<p><strong>Redux 的核心概念是，组件发出 action 与状态管理器通信。状态管理器收到 action 以后，使用 Reducer 函数算出新的状态，Reducer 函数的形式是<code>(state, action) =&gt; newState。</code></strong></p>
+<p><code>useReducers</code>()钩子用来引入 <code>Reducer</code> 功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initialState);</span><br></pre></td></tr></table></figure>
+
+<p>上面是useReducer()的基本用法，它接受 Reducer 函数和状态的初始值作为参数，返回一个数组。数组的第一个成员是状态的当前值，第二个成员是发送 action 的dispatch函数。</p>
+<p>下面是 <code>Reducer</code> 的书写格式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// myReducer.js</span></span><br><span class="line"><span class="keyword">const</span> myReducer = <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;type&#125; = action;</span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ADD_COUNT&#x27;</span>: <span class="keyword">return</span> &#123;<span class="attr">count</span>: state.count + <span class="number">1</span>&#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ODD_COUNT&#x27;</span>: <span class="keyword">return</span> &#123;<span class="attr">count</span>: state.count - <span class="number">1</span>&#125;</span><br><span class="line">    <span class="attr">default</span>: <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> myReducer</span><br></pre></td></tr></table></figure>
+
+<p>当按钮点击dispath提交一次对应的type 在myReducer.js找到对应分支修改state.count的数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// count.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 引入 useReducer */</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;useReducer&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"><span class="comment">/* 引入 myReducer */</span></span><br><span class="line"><span class="keyword">import</span> myReducer <span class="keyword">from</span> <span class="string">&#x27;../reducer/myReducer&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">Count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [state, dispath] = useReducer(myReducer, &#123;<span class="attr">count</span>: <span class="number">0</span>&#125;);</span><br><span class="line">  <span class="keyword">const</span> addCount = <span class="function">() =&gt;</span> dispath(&#123;<span class="attr">type</span>: <span class="string">&#x27;ADD_COUNT&#x27;</span>&#125;);</span><br><span class="line">  <span class="keyword">const</span> oddCount = <span class="function">() =&gt;</span> dispath(&#123;<span class="attr">type</span>: <span class="string">&#x27;ODD_COUNT&#x27;</span>&#125;);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;addCount&#125;</span>&gt;</span>&#123;state.count&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;oddCount&#125;</span>&gt;</span>&#123;state.count&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-useEffect-副作用钩子"><a href="#4-useEffect-副作用钩子" class="headerlink" title="4.useEffect(副作用钩子)"></a>4.<span style="color:red">useEffect(副作用钩子)</span></h3><p><code>useEffect()</code>用来引入具有副作用的操作，最常见的就是向服务器请求数据。以前，放在<code>componentDidMount</code>里面的代码，现在可以放在<code>useEffect()</code>。<br>useEffect() 的用途:</p>
+<ul>
+<li>获取数据</li>
+<li>事件监听或订阅</li>
+<li>改变 DOM</li>
+<li>输出日志</li>
+</ul>
+<p><code>useEffect()</code>的用法如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useEffect( <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Async Action</span></span><br><span class="line">&#125;,[dependencies])</span><br></pre></td></tr></table></figure>
+
+<p>useEffect()接受两个参数:</p>
+<ol>
+<li>第一个参数是一个函数，异步操作的代码放在里面。</li>
+<li>第二个参数是一个数组，用于给出 Effect 的依赖项，只要这个数组发生变化，useEffect()就会执行。</li>
+<li>第二个参数可以省略，这时每次组件渲染时，就会执行useEffect()。</li>
+<li>当参数为 <code>[]</code> 空数组时，只执行一次副作用函数(可以用来获取数据)</li>
+</ol>
+<p>实例代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect, useState &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">Welcome</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [text, setText] = useState(<span class="number">0</span>)</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">    </span><br><span class="line">  &#125;,[]);</span><br><span class="line">  <span class="keyword">const</span> handleClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    setText(text+<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">onClick</span>=<span class="string">&#123;handleClick&#125;</span>&gt;</span>&#123;text&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>useEffect() 的返回值<br>副效应是随着组件加载而发生的，那么组件卸载时，可能需要清理这些副效应。</p>
+</blockquote>
+<p>useEffect()允许返回一个函数，在组件卸载时，执行该函数，清理副效应。如果不需要清理副效应，useEffect()就不用返回任何值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [varA, setVarA] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> [varB, setVarB] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> timeout = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> setVarA(varA + <span class="number">1</span>), <span class="number">1000</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="built_in">clearInterval</span>(<span class="built_in">setInterval</span>);</span><br><span class="line">  &#125;, [varA]);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> timeout = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> setVarB(varB + <span class="number">2</span>), <span class="number">2000</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="built_in">clearInterval</span>(timeout);</span><br><span class="line">  &#125;, [varB]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;varA&#125;, &#123;varB&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后编辑时间：2022-03-17 00:41:00</p>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>-- end --</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2022/03/17/ReactHook%E5%9B%9B%E4%B8%AA%E9%92%A9%E5%AD%90/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2022/03/17/ReactHook%E5%9B%9B%E4%B8%AA%E9%92%A9%E5%AD%90/";
+            const title         = "「React Hook四个钩子」";
+            const excerpt       = `react四个钩子用法一、组件类的缺点React 的核心是组件。v16.8 版本之前，组件的标准写法是类（class）。下面是一个简单的组件类。
+123456789101112131415import React, &#123;Com...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-03-17</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 手写防抖无缝轮播图" href="/2022/03/08/手写防抖无缝轮播图/">&lt; 上一篇</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Egret/">Egret</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TS/">TS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gulp/">gulp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mock/">mock</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rem%E9%80%82%E9%85%8D/">rem适配</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/03/17/ReactHook%E5%9B%9B%E4%B8%AA%E9%92%A9%E5%AD%90/"><i class="fa  fa-book"></i> React Hook四个钩子</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/03/08/%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E6%97%A0%E7%BC%9D%E8%BD%AE%E6%92%AD%E5%9B%BE/"><i class="fa  fa-book"></i> 手写防抖无缝轮播图</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/03/08/Promise%20%E5%92%8C%20async%20await%20%E8%A7%A3%E5%86%B3%E5%BC%82%E6%AD%A5%E5%9B%9E%E8%B0%83/"><i class="fa  fa-book"></i> Promise 和 async await 解决异步回调</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/23/Redux/"><i class="fa  fa-book"></i> Redux</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/23/%E8%A3%85%E9%A5%B0%E5%99%A8/"><i class="fa  fa-book"></i> 装饰器</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://t.me/CandyUnion"><i class="fa fa-telegram"></i></a></li>
+                        
+                        
+                        
+                        <li><a target="_blank" rel="me" href="https://nya.one/@qiusenn"><i class="fa fa fa-share-alt-square"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/qiusenn"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 Sen's blog.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by 小森.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
